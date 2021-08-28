@@ -73,6 +73,30 @@ msg2 = "hello";
 let animal = { cat: "small cat"};
 let newAnimal: typeof animal = { cat: "big cat"};
 
+// keyof
+type KEYS = {
+  primary: string;
+  secondary: string;
+};
+
+// keyofは宣言済みの型のプロパティのキーをunion型として返す
+let key: keyof KEYS;
+// つまり以下の通りになる
+key = "primary";
+// error
+// key = "foreign";
+
+// typeofとkeyofの組み合わせ
+const SPORTS = {
+  soccer: "Soccer",
+  baseball: "Baseball",
+}
+
+// これでまずkeyofでkeySports: "soccer" | "baseball"が決まる
+// 次にtypeofで"soccer"と"baseball"がstring型に決まる
+let keySports: keyof typeof SPORTS;
+keySports = "soccer";
+
 
 function App() {
   return (
