@@ -47,6 +47,24 @@ const userA: USER = {
   password: 'password'
 }
 
+// Union Types
+
+let value: boolean | number
+value = true;
+value = 10;
+// error
+// value = "hello";
+
+let arrayUni: (number | string)[];
+arrayUni = [0,1,2,"hello"]
+
+let company: "Facebook" | "Apple" | "Google" | "Microsoft" | "Amazon";
+company = "Amazon";
+// error
+// company = "Yahoo";
+
+
+
 function App() {
   return (
     <div className="App">
