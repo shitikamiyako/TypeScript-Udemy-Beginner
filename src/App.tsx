@@ -128,6 +128,27 @@ const PC3: PC = {
   OSType: OS.Linux,
 }
 
+// 型の互換性
+// 型は抽象度が高いものから低いものへの互換性はある。
+// 例えば以下の例、型推論のものをあとでアノテーションの宣言がある変数へ代入しても問題なく通る
+const comp1 = "test";
+let comp2: string = comp1;
+
+// 逆にアノテーションで宣言している変数を別の型へと代入することはできない
+let comp3: string = "sample";
+// 一見等価に見えるが、string型と文字リテラル型との違いがあるのでerror
+// let comp4: "sample" = comp3;
+
+// 同様に関数の場合は例えば引数の型が違えば等価にはならない
+let func1 = (x:string) => {
+  console.log(x);
+}
+
+let func2 = (x:number) => {
+  console.log(x);
+}
+// error
+// func1 = func2;
 
 
 function App() {
