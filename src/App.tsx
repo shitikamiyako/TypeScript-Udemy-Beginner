@@ -63,6 +63,15 @@ company = "Amazon";
 // error
 // company = "Yahoo";
 
+// typeof
+let msg: string = "Hi";
+// typeofを使うと宣言済みの型から型定義を継承できる
+// つまり、msg2: String
+let msg2: typeof msg;
+msg2 = "hello";
+
+let animal = { cat: "small cat"};
+let newAnimal: typeof animal = { cat: "big cat"};
 
 
 function App() {
