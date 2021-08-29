@@ -2,6 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { error } from 'console';
+import Data from "./data.json"
+
+// data.jsonから型を継承
+type USERS = typeof Data;
 
 // 型推論<型定義(アノテーション)の優先順位
 
