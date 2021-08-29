@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { error } from 'console';
 
 // 型推論<型定義(アノテーション)の優先順位
 
@@ -150,6 +151,62 @@ let func2 = (x:number) => {
 // error
 // func1 = func2;
 
+// Generics
+
+interface GEN<T> {
+  item: T;
+}
+const gen0: GEN<string> = { item: "hello" };
+// error
+// const gen1: GEN = { item: "world" };
+const gen2: GEN<number> = { item: 14 };
+// デフォルトの型指定をしたい場合は以下の通り
+interface GEN1<T = string> {
+  item: T;
+}
+const gen3: GEN1 = {item: "world"};
+// 指定する型を制限したい場合はextendsを使う
+interface GEN2<T extends string | number> {
+  item: T;
+}
+const gen4: GEN2<string> = { item: 'string'};
+const gen5: GEN2<number> = { item: 5};
+// error
+// const gen6: GEN2<boolean> = { item: false};
+
+function funcGen<T>(props:T) {
+  return {item: props};
+}
+// アロー関数の場合は必ずextendsを使わないとエラーになる
+const funcGen1 = <T extends {}> (props: T) => {
+  return {item: props};
+}
+const gen7 = funcGen1("test");
+
+// 型制限もできる
+function funcGen2<T extends string | null>(props: T) {
+  return {item: props};
+}
+const funcGen3 = <T extends {} | string | null> (props: T) => {
+  return {item: props};
+}
+
+const gen8 = funcGen2("test");
+const gen9 = funcGen2(null);
+const gen10 = funcGen3("sample");
+// error
+// const gen11 = funcGen2(1);
+
+// interfaceと使う
+interface Props {
+  price: number;
+}
+const funcGen4 = <T extends Props> (props: T) => {
+  return {value: props.price};
+}
+const gen12 = funcGen4({price:1})
+// error
+// const gen13 = function({price:'string'})
 
 function App() {
   return (
